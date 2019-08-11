@@ -1,0 +1,91 @@
+// This file contains overrides to the default bootstrap modules
+// Other stylings should probably go elsewhere.
+@import 'bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+  background-color: #F4F3EF;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 30px;
+}
+
+.card-body .table {
+  margin-bottom: 0;
+}
+
+.card .h4 {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.col-form-label {
+  font-weight: 800;
+  text-align: right;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 768px) {
+  .col-form-label {
+    text-align: left;
+  }
+}
+
+
+.btn + .btn {
+  margin-left: 6px;
+}
+
+.simple_form {
+
+  // Bootstrap checkboxes
+  .form-check {
+    // Reduces padding of bootstrap-checkboxes when used in a simple_form
+    padding-left: 0;
+
+    // Adds form-control stylings to bootstrap-checkbox, which expects bootstrap3 styless
+    .btn-group:focus {
+      outline: 0;
+      border-radius: 6px;
+      @include form-control-focus();
+    }
+  }
+
+  // SimpleForm bootstrap templates don't account input-group wrappers
+  .is-invalid ~ .invalid-feedback {
+    display: block;
+  }
+
+  // Removes table border from datetimepicer calendar popup
+  .bootstrap-datetimepicker-widget {
+    .table {
+      font-family: sans-serif;
+      border-style: none;
+      td { border-style: none; }
+    }
+  }
+}
+
+textarea.form-control {
+  height: 12em;
+}
+
+pre.scrollable:not(:empty) {
+  padding: 5px;
+  max-height: 12em;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+}
+
+pre.sans {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.currency {
+  text-align: right;
+}
+
+.pagination {
+  margin: 0;
+}
+
