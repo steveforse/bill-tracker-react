@@ -1,7 +1,13 @@
 import React from 'react';
+import { Router } from "@reach/router";
 
 import Header from './Header'
-import Payees from './Payees'
+
+import NotFound from './NotFound'
+import Calendar from './Calendar'
+import Payments from './Payments'
+import Setup from './Setup'
+
 
 import './stylesheets/App.scss'
 
@@ -10,7 +16,13 @@ function App() {
     <div className="App">
       <Header />
       <div className="container">
-        <Payees />
+        <Router>
+          <NotFound default />
+          <Calendar path='/' />
+          <Calendar path='/calendar' />
+          <Payments path='/payments' />
+          <Setup path='setup/*' />
+        </Router>
       </div>
     </div>
   );

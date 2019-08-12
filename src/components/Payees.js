@@ -105,13 +105,13 @@ class  Payees extends Component {
                     <td>{urlLink(payee.website)}</td>
                     <td>{phoneLink(payee.phone_number)}</td>
                     <td className="text-nowrap">
-                      <Button variant="primary" href={`/payees/${payee.id}`}>
+                      <Button variant="primary" href={`/setup/payees/${payee.id}`}>
                         <FaInfoCircle />{' Details'}
                       </Button>
                       <Button
                         variant="danger"
-                        href={`/payees/${payee.id}`}
-                        onClick={(e) => {this.handleModalShow(e, `/payees/${payee.id}`)}}>
+                        href={`/setup/payees/${payee.id}`}
+                        onClick={(e) => {this.handleModalShow(e, `/setup//payees/${payee.id}`)}}>
                         <FaTrash />{' Delete'}
                       </Button>
                     </td>
