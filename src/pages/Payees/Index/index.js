@@ -12,12 +12,9 @@ import {
   FaInfoCircle,
 } from 'react-icons/fa';
 
-import {
-  urlLink,
-  phoneLink
-} from '../helpers'
-
-import DeleteModal from './DeleteModal'
+import PhoneLink from '../../../components/PhoneLink'
+import UrlLink from '../../../components/UrlLink'
+import DeleteModal from '../../../components/DeleteModal'
 
 class  Payees extends Component {
   state = {
@@ -102,8 +99,8 @@ class  Payees extends Component {
                   return(<tr key={payee.id.toString()}>
                     <td>{payee.name}</td>
                     <td>{payee.nickname}</td>
-                    <td>{urlLink(payee.website)}</td>
-                    <td>{phoneLink(payee.phone_number)}</td>
+                    <td><UrlLink url={payee.website} /></td>
+                    <td><PhoneLink phoneNumber={payee.phone_number} /></td>
                     <td className="text-nowrap">
                       <Button variant="primary" href={`/setup/payees/${payee.id}`}>
                         <FaInfoCircle />{' Details'}

@@ -8,7 +8,7 @@ import {
 import { FaSignOutAlt } from 'react-icons/fa';
 import Logo from './images/logo.png'
 
-import './stylesheets/Header.scss'
+import './styles/Header.scss'
 
 class  Header extends Component {
   render() {
