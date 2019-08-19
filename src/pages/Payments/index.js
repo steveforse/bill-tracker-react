@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class  Payments extends Component {
-  render() {
-    return (
-      <h1>Payments go here</h1>
-    )
-  }
-}
-
-export default Payments;
+export default props => (
+  <>
+    {props.children}
+  </>
+)

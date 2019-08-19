@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 
 import {
-  Card,
   Button,
   Table,
 } from 'react-bootstrap';
 
 import {
-  FaPlus,
   FaTrash,
   FaInfoCircle,
 } from 'react-icons/fa';
@@ -15,6 +13,8 @@ import {
 import PhoneLink from '../../../components/PhoneLink'
 import UrlLink from '../../../components/UrlLink'
 import DeleteModal from '../../../components/DeleteModal'
+
+import Card from '../../../components/Card'
 
 class  Payees extends Component {
   state = {
@@ -78,46 +78,42 @@ class  Payees extends Component {
 
     return (
       <>
-        <Card>
-          <Card.Header className="d-flex">
-            <div className="h4 mr-auto">Payees</div>
-            <Button variant="success"><FaPlus />{' New Payee'}</Button>
-          </Card.Header>
-          <Card.Body className="p-0">
-            <Table striped bordered hover responsive size="sm">
-              <thead className="thead-light">
-                <tr>
-                  <th>Name</th>
-                  <th>Nickname</th>
-                  <th>Website</th>
-                  <th>Phone Number</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {payees.map(payee => {
-                  return(<tr key={payee.id.toString()}>
-                    <td>{payee.name}</td>
-                    <td>{payee.nickname}</td>
-                    <td><UrlLink url={payee.website} /></td>
-                    <td><PhoneLink phoneNumber={payee.phone_number} /></td>
-                    <td className="text-nowrap">
-                      <Button variant="primary" href={`/setup/payees/${payee.id}`}>
-                        <FaInfoCircle />{' Details'}
-                      </Button>
-                      <Button
-                        variant="danger"
-                        href={`/setup/payees/${payee.id}`}
-                        onClick={(e) => {this.handleModalShow(e, `/setup//payees/${payee.id}`)}}>
-                        <FaTrash />{' Delete'}
-                      </Button>
-                    </td>
-                  </tr>)
-                })}
-              </tbody>
-            </Table>
-          </Card.Body>
+        <Card title="Payees" className="p-0" headerButton={{ text: 'New Payee', url: '/setup/payees/new' }}>
+          <Table striped bordered hover responsive size="sm">
+            <thead className="thead-light">
+              <tr>
+                <th>Name</th>
+                <th>Nickname</th>
+                <th>Website</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {payees.map(payee => {
+                return(<tr key={payee.id.toString()}>
+                  <td>{payee.name}</td>
+                  <td>{payee.nickname}</td>
+                  <td><UrlLink url={payee.website} /></td>
+                  <td><PhoneLink phoneNumber={payee.phone_number} /></td>
+                  <td className="text-nowrap">
+                    <Button variant="primary" href={`/setup/payees/${payee.id}`}>
+                      <FaInfoCircle />{' Details'}
+                    </Button>
+                    <Button
+                      variant="danger"
+                      href={`/setup/payees/${payee.id}`}
+                      onClick={(e) => {this.handleModalShow(e, `/setup//payees/${payee.id}`)}}>
+                      <FaTrash />{' Delete'}
+                    </Button>
+                  </td>
+                </tr>)
+              })}
+            </tbody>
+          </Table>
         </Card>
+
+
         <DeleteModal
           isShowing={this.state.showModal}
           modalHide={this.handleModalHide}

@@ -1,8 +1,11 @@
 import React from 'react';
 import {
-  Button,
   Modal
 } from 'react-bootstrap';
+
+import {FaTrash} from 'react-icons/fa'
+
+import Button from './Button.js'
 
 const DeleteModal = ({isShowing, modalHide, onEnter, deleteUrl, bodyText}) => {
   return (
@@ -15,7 +18,7 @@ const DeleteModal = ({isShowing, modalHide, onEnter, deleteUrl, bodyText}) => {
         <Button variant="default" onClick={modalHide}>
           Cancel
         </Button>
-        <Button variant="danger" onClick={() => { console.log(deleteUrl) }}>
+        <Button variant="danger" icon={FaTrash} onClick={() => { console.log(deleteUrl) }}>
           Delete Payee
         </Button>
       </Modal.Footer>
