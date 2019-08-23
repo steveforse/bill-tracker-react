@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import UrlLink from '../../../components/UrlLink'
-import PhoneLink from '../../../components/PhoneLink'
-import Card from '../../../components/Card'
-import Button from '../../../components/Button.js'
+import UrlLink from '../../components/UrlLink'
+import PhoneLink from '../../components/PhoneLink'
+import Card from '../../components/Card'
+import Button from '../../components/Button.js'
 
-import { toCurrency } from '../../../helper'
+import { toCurrency } from '../../helper'
 
 import {
   FaEdit,

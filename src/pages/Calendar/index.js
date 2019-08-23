@@ -177,15 +177,15 @@ class  Calendar extends Component {
                 <div className="row">
                   <div className="col-sm-4 text-center">
                     <span className="fc-event-dot payment unpaid-late" />
-                    Unpaid Late
+                    {" Unpaid Late"}
                   </div>
                   <div className="col-sm-4 text-center">
                     <span className="fc-event-dot payment unpaid-due" />
-                    Unpaid Due
+                    {" Paid Late"}
                   </div>
                   <div className="col-sm-4 text-center">
                     <span className="fc-event-dot payment paid-late" />
-                    Paid
+                    {" Paid"}
                   </div>
                 </div>
               </fieldset>

@@ -2,10 +2,21 @@ import React from 'react';
 
 import Button from '../../../components/Button'
 
-import {
-  FaEdit,
-  FaTrash,
-} from 'react-icons/fa';
+import { FaEdit } from 'react-icons/fa';
+
+const buttons = window.location.pathname.split('/').pop() === 'edit' ? (
+  <div className="col-sm-9 offset-sm-3">
+    <Button variant="primary">Update Payee</Button>
+    <Button variant="outline-secondary" type="reset">Reset Form</Button>
+    <Button variant="outline-secondary" url="/setup/payees/30">Back to Payee Details</Button>
+  </div>
+) : (
+  <div className="col-sm-9 offset-sm-3">
+    <Button variant="primary" icon={FaEdit}>Create Payee</Button>
+    <Button variant="outline-secondary" type="reset">Reset Form</Button>
+    <Button variant="outline-secondary" url="/setup/payees">Back to Payees List</Button>
+  </div>
+)
 
 export default props => (
   <form>
@@ -41,11 +52,7 @@ export default props => (
     </div>
 
     <div className="form-group row">
-      <div className="col-sm-9 offset-sm-3">
-        <Button variant="primary"><FaEdit /> Edit Payee</Button>
-        <Button variant="danger"><FaTrash /> Delete Payee</Button>
-        <Button variant="outline-secondary">Back to Payees List</Button>
-      </div>
+      { buttons }
     </div>
   </form>
 )

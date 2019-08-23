@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Card from '../../../components/Card'
-import Form from '../components/Form'
+import Card from '../../components/Card'
+import Form from './components/Form'
 
 class  PayeeNew extends Component {
   render() {

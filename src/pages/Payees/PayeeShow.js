@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-import UrlLink from '../../../components/UrlLink'
-import PhoneLink from '../../../components/PhoneLink'
-import Card from '../../../components/Card'
-import Button from '../../../components/Button.js'
+import UrlLink from '../../components/UrlLink'
+import PhoneLink from '../../components/PhoneLink'
+import Card from '../../components/Card'
+import Button from '../../components/Button.js'
+import DeleteModal from '../../components/DeleteModal'
 
-import { toCurrency } from '../../../helper'
+import { toCurrency } from '../../helper'
 
 import {
   FaEdit,
@@ -14,6 +15,30 @@ import {
 } from 'react-icons/fa';
 
 class  PayeeShow extends Component {
+  state = {
+    showModal: false,
+    deleteUrl: null
+  }
+
+  handleModalShow = (e, url) => {
+    e.preventDefault();
+    this.setState({
+      showModal: true,
+      deleteUrl: url
+    })
+  }
+
+  handleModalHide = (e) => {
+    this.setState({
+      showModal: false,
+      deleteUrl: null
+    })
+  }
+
+  handleEnter = () => {
+    document.querySelector('.modal .btn.btn-default').focus()
+  }
+
   render() {
     const scheduleColumns = ['Name', 'Start Date', 'End Date', 'Frequency', 'Autopay',
                              'Minimum Payment', 'Actions']
@@ -41,9 +66,15 @@ class  PayeeShow extends Component {
             </div>
             <div className="row form-group">
               <div className="offset-sm-3 col-sm-9 ">
-                <Button variant="primary"><FaEdit /> Edit Payee</Button>
-                <Button variant="danger"><FaTrash /> Delete Payee</Button>
-                <Button variant="outline-secondary">Back to Payees List</Button>
+                <Button variant="primary" url="/setup/payees/25/edit" icon={FaEdit}>Edit Payee</Button>
+                <Button
+                  variant="danger"
+                  href={`/setup/payees/30`}
+                  icon={FaTrash}
+                  onClick={(e) => {this.handleModalShow(e, `/setup/payes/30`)}}>
+                  Delete Payee
+                </Button>
+                <Button variant="outline-secondary" url="/setup/payees">Back to Payees List</Button>
               </div>
             </div>
         </Card>
@@ -72,6 +103,16 @@ class  PayeeShow extends Component {
             </tbody>
           </table>
         </Card>
+        <DeleteModal
+          isShowing={this.state.showModal}
+          modalHide={this.handleModalHide}
+          onEnter={this.handleEnter}
+          deleteUrl={this.state.deleteUrl}
+          bodyText={`
+            Deleting this payee will also peremanently delete all associated schedules with
+            their payment histories. Are you sure you want to permanently delete this paye?
+          `}
+        />
       </>
     )
   }

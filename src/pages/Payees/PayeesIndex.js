@@ -10,13 +10,12 @@ import {
   FaInfoCircle,
 } from 'react-icons/fa';
 
-import PhoneLink from '../../../components/PhoneLink'
-import UrlLink from '../../../components/UrlLink'
-import DeleteModal from '../../../components/DeleteModal'
+import PhoneLink from '../../components/PhoneLink'
+import UrlLink from '../../components/UrlLink'
+import DeleteModal from '../../components/DeleteModal'
+import Card from '../../components/Card'
 
-import Card from '../../../components/Card'
-
-class  Payees extends Component {
+class  PayeesIndex extends Component {
   state = {
     showModal: false,
     deleteUrl: null
@@ -113,7 +112,6 @@ class  Payees extends Component {
           </Table>
         </Card>
 
-
         <DeleteModal
           isShowing={this.state.showModal}
           modalHide={this.handleModalHide}
@@ -129,4 +127,4 @@ class  Payees extends Component {
   }
 }
 
-export default Payees;
+export default PayeesIndex;

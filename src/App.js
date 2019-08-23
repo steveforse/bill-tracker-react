@@ -6,17 +6,17 @@ import Header from './components/Header'
 import NotFound from './components/NotFound'
 
 import Calendar from './pages/Calendar'
-import Payments from './pages/Payments'
 
-import PayeesIndex from './pages/Payees/Index'
-import PayeeShow from './pages/Payees/Show'
-import PayeeNew from './pages/Payees/New'
-import PayeeEdit from './pages/Payees/Edit'
+import PayeesIndex from './pages/Payees/PayeesIndex'
+import PayeeShow from './pages/Payees/PayeeShow'
+import PayeeNew from './pages/Payees/PayeeNew'
+import PayeeEdit from './pages/Payees/PayeeEdit'
 
-import ScheduleNew from './pages/Schedules/New'
-import ScheduleEdit from './pages/Schedules/Edit'
-import ScheduleShow from './pages/Schedules/Show'
+import ScheduleNew from './pages/Schedules/ScheduleNew'
+import ScheduleEdit from './pages/Schedules/ScheduleEdit'
+import ScheduleShow from './pages/Schedules/ScheduleShow'
 
+import PaymentsIndex from './pages/Payments/PaymentsIndex'
 import PaymentNew from './pages/Payments/New'
 import PaymentEdit from './pages/Payments/Edit'
 import PaymentShow from './pages/Payments/Show'
@@ -34,7 +34,7 @@ export default props => (
 				<Calendar path="/calendar" />
 
         {/* Payments */}
-				<Payments path="/payments" />
+				<PaymentsIndex path="/payments" />
 
         {/* Setup */}
         <Redirect from='/setup' to='/setup/payees' noThrow />
