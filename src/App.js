@@ -17,9 +17,8 @@ import ScheduleEdit from './pages/Schedules/ScheduleEdit'
 import ScheduleShow from './pages/Schedules/ScheduleShow'
 
 import PaymentsIndex from './pages/Payments/PaymentsIndex'
-import PaymentNew from './pages/Payments/New'
-import PaymentEdit from './pages/Payments/Edit'
-import PaymentShow from './pages/Payments/Show'
+import PaymentNew from './pages/Payments/PaymentNew'
+import PaymentEdit from './pages/Payments/PaymentEdit'
 
 import './styles/App.scss'
 
@@ -52,8 +51,7 @@ export default props => (
 
         {/* Payments */}
         <PaymentNew path='/setup/schedules/:id/payments/new' />
-        <PaymentShow path='/setup/payments/:id' />
-        <PaymentEdit path='/setup/payements/:id/edit' />
+        <PaymentEdit path='/setup/payments/:id/edit' />
 
         {/* 404-ish */}
 				<NotFound default />

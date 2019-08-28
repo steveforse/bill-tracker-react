@@ -37,7 +37,7 @@ export default props => (
           <td>{payment.schedule}</td>
           <td>{payment.date}</td>
           <td>{payment.due_date}</td>
-          <td className="text-right">{toCurrency.format(payment.amount)}</td>
+          <td className="text-right">{toCurrency(payment.amount)}</td>
         </tr>
       ))}
       </tbody>

@@ -1,80 +1,137 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-import UrlLink from '../../components/UrlLink'
-import PhoneLink from '../../components/PhoneLink'
 import Card from '../../components/Card'
-import Button from '../../components/Button.js'
+import Button from '../../components/Button'
+import DeleteModal from '../../components/DeleteModal'
 
 import { toCurrency } from '../../helper'
 
 import {
   FaEdit,
   FaTrash,
-  FaInfoCircle
 } from 'react-icons/fa';
 
-class  PayeeShow extends Component {
-  render() {
-    const scheduleColumns = ['Name', 'Start Date', 'End Date', 'Frequency', 'Autopay',
-                             'Minimum Payment', 'Actions']
-    const schedules = [
-      {id: 1, name: 'Schedule A', end_date: '07/10/2019', frequency: 'Weekly', autopay: 'enabled', minimum_payment: 123.45}
-    ]
-    return (
-      <>
-        <Card title="Payee Details">
-            <div className="row form-group">
-              <div className="col-sm-3 col-form-label">Name</div>
-              <div className="col-sm-9 form-control-plaintext">AAA Life Insurance</div>
-            </div>
-            <div className="row form-group">
-              <div className="col-sm-3 col-form-label">Nickname</div>
-              <div className="col-sm-9 form-control-plaintext">Life Insurance</div>
-            </div>
-            <div className="row form-group">
-              <div className="col-sm-3 col-form-label">Website</div>
-              <div className="col-sm-9 form-control-plaintext"><UrlLink url="http://example.com" /></div>
-            </div>
-            <div className="row form-group">
-              <div className="col-sm-3 col-form-label">Phone Number</div>
-              <div className="col-sm-9 form-control-plaintext"><PhoneLink phoneNumber="555-555-5555" /></div>
-            </div>
-            <div className="row form-group">
-              <div className="offset-sm-3 col-sm-9 ">
-                <Button variant="primary"><FaEdit /> Edit Payee</Button>
-                <Button variant="danger"><FaTrash /> Delete Payee</Button>
-                <Button variant="outline-secondary">Back to Payees List</Button>
-              </div>
-            </div>
-        </Card>
-        <br />
-        <Card title="Schedules" className="p-0" headerButton={{text:'New Schedule', url:"/payees/1/schedules/new"}}>
-          <table className="table table-bordered table-striped table-hover table-sm">
-            <thead>
-              <tr>
-              {scheduleColumns.map( column => (
-                <th>{column}</th>
-              ))}
-              </tr>
-            </thead>
-            <tbody>
-            {schedules.map(schedule => (
-              <tr>
-                <td>{schedule.name}</td>
-                <td>{schedule.start_date}</td>
-                <td>{schedule.end_date}</td>
-                <td>{schedule.frequency}</td>
-                <td>{schedule.autopay}</td>
-                <td className="text-right">{toCurrency.format(schedule.minimum_payment)}</td>
-                <td><Button variant="primary" icon={FaInfoCircle}>Details</Button></td>
-              </tr>
-            ))}
-            </tbody>
-          </table>
-        </Card>
-      </>
-    )
+export default props => {
+  const [isShowingScheduleModal, setShowScheduleModal] = useState(false)
+  const handleCloseScheduleModal = () => setShowScheduleModal(false)
+  const handleShowScheduleModal = () => setShowScheduleModal(true)
+
+  const [isShowingPaymentModal, setShowPaymentModal] = useState(false)
+  const handleClosePaymentModal = () => setShowPaymentModal(false)
+  const handleShowPaymentModal = () => setShowPaymentModal(true)
+
+  const handleEnter = () => document.querySelector('.modal.show .btn.btn-default').focus()
+
+  const payments = [
+    {
+      id: 1,
+      date: 'Schedule A',
+      due_date: '07/10/2019',
+      amount: 123.45,
+      comment: 'Remember to cancel before December 1st'
+    }
+  ]
+
+  const schedule = {
+    id: 1,
+    name: 'Schedule A',
+    start_date: '07/10/2019',
+    end_date: '07/17/2019',
+    frequency: 'Weekly',
+    autopay: 'Enabled',
+    minimum_payment: 123.45
   }
+
+  return (
+    <>
+      <Card title="Schedule Details">
+          <div className="row form-group">
+            <div className="col-sm-3 col-form-label">Name</div>
+            <div className="col-sm-9 form-control-plaintext">{schedule.name}</div>
+          </div>
+          <div className="row form-group">
+            <div className="col-sm-3 col-form-label">Start Date</div>
+            <div className="col-sm-9 form-control-plaintext">{schedule.start_date}</div>
+          </div>
+          <div className="row form-group">
+            <div className="col-sm-3 col-form-label">End Date</div>
+            <div className="col-sm-9 form-control-plaintext">{schedule.end_date}</div>
+          </div>
+          <div className="row form-group">
+            <div className="col-sm-3 col-form-label">Frequency</div>
+            <div className="col-sm-9 form-control-plaintext">{schedule.frequency}</div>
+          </div>
+          <div className="row form-group">
+            <div className="col-sm-3 col-form-label">Autopay</div>
+            <div className="col-sm-9 form-control-plaintext">{schedule.autopay}</div>
+          </div>
+          <div className="row form-group">
+            <div className="col-sm-3 col-form-label">Minimum Payment</div>
+            <div className="col-sm-9 form-control-plaintext">
+              {toCurrency(schedule.minimum_payment)}
+            </div>
+          </div>
+          <div className="row form-group">
+            <div className="offset-sm-3 col-sm-9 ">
+              <Button variant="primary" icon={FaEdit} url="/setup/schedules/1/edit">Edit Schedule</Button>
+              <Button variant="danger" icon={FaTrash} onClick={handleShowScheduleModal}>Delete Schedule</Button>
+              <Button variant="outline-secondary" url="/setup/payees/1">Back to Payee Details</Button>
+            </div>
+          </div>
+      </Card>
+      <br />
+      <Card
+        title="Payments"
+        className="p-0"
+        headerButton={{text:'New Payment', url:"/setup/schedules/1/payments/new"}}>
+        <table className="table table-bordered table-striped table-hover table-sm">
+          <thead className="thead-light">
+            <tr>
+            {['Date', 'Due Date', 'Amount', 'Comment', 'Actions'].map( column => (
+              <th>{column}</th>
+            ))}
+            </tr>
+          </thead>
+          <tbody>
+          {payments.map(payment => (
+            <tr>
+              <td>{payment.date}</td>
+              <td>{payment.due_date}</td>
+              <td className="text-right">{toCurrency(payment.amount)}</td>
+              <td>{payment.comment}</td>
+              <td className="text-nowrap">
+                <Button variant="primary" icon={FaEdit} url="/setup/payments/1/edit">
+                  Edit Payment
+                </Button>
+                <Button variant="danger" icon={FaTrash} onClick={handleShowPaymentModal}>
+                  Delete Payment
+                </Button>
+              </td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
+      </Card>
+      <DeleteModal
+        isShowing={isShowingScheduleModal}
+        modalHide={handleCloseScheduleModal}
+        onEntered={handleEnter}
+        deleteUrl={'/setup/schedules/1'}
+        bodyText={`
+          Deleting this schedule will also permanently delete all associated historical payments.
+          Are you sure you want to delete this schedule?
+        `}
+      />
+      <DeleteModal
+        isShowing={isShowingPaymentModal}
+        modalHide={handleClosePaymentModal}
+        onEntered={handleEnter}
+        deleteUrl={'/setup/payments/1'}
+        bodyText={`
+          Are you sure you want to permanently delete this payment?
+        `}
+      />
+    </>
+  )
 }
 
-export default PayeeShow;
