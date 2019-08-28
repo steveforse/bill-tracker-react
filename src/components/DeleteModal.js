@@ -7,9 +7,9 @@ import {FaTrash} from 'react-icons/fa'
 
 import Button from './Button.js'
 
-const DeleteModal = ({isShowing, modalHide, onEnter, deleteUrl, bodyText}) => {
+export default ({isShowing, modalHide, deleteUrl, bodyText, ...otherProps}) => {
   return (
-    <Modal show={isShowing} onHide={modalHide} onEnter={onEnter} >
+    <Modal {...otherProps} show={isShowing} onHide={modalHide} >
       <Modal.Header closeButton>
         <Modal.Title>Are you sure?</Modal.Title>
       </Modal.Header>
@@ -26,4 +26,3 @@ const DeleteModal = ({isShowing, modalHide, onEnter, deleteUrl, bodyText}) => {
   )
 }
 
-export default DeleteModal;
