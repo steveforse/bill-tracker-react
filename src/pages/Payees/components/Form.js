@@ -1,22 +1,7 @@
 import React from 'react';
+import { globalHistory } from '@reach/router'
 
 import Button from '../../../components/Button'
-
-import { FaEdit } from 'react-icons/fa';
-
-const buttons = window.location.pathname.split('/').pop() === 'edit' ? (
-  <div className="col-sm-9 offset-sm-3">
-    <Button variant="primary">Update Payee</Button>
-    <Button variant="outline-secondary" type="reset">Reset Form</Button>
-    <Button variant="outline-secondary" url="/setup/payees/30">Back to Payee Details</Button>
-  </div>
-) : (
-  <div className="col-sm-9 offset-sm-3">
-    <Button variant="primary" icon={FaEdit}>Create Payee</Button>
-    <Button variant="outline-secondary" type="reset">Reset Form</Button>
-    <Button variant="outline-secondary" url="/setup/payees">Back to Payees List</Button>
-  </div>
-)
 
 export default props => (
   <form>
@@ -52,7 +37,16 @@ export default props => (
     </div>
 
     <div className="form-group row">
-      { buttons }
+      <div className="col-sm-9 offset-sm-3">
+        <Button variant="primary">
+          {globalHistory.location.pathname.includes('new') ? 'Create Payee'
+                                                           : 'Update Payee'}
+        </Button>
+        <Button variant="outline-secondary" type="reset">Reset Form</Button>
+        {globalHistory.location.pathname.includes('new')
+          ? <Button variant="outline-secondary" url="/setup/payees">Back to Payees List</Button>
+          : <Button variant="outline-secondary" url="/setup/payees/30">Back to Payee Details</Button>}
+      </div>
     </div>
   </form>
 )
